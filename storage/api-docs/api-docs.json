@@ -1,0 +1,1575 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "StoreFy API",
+        "description": "StoreFY Swagger OpenApi description",
+        "contact": {
+            "email": "georgeton.ufg@gmail.com"
+        },
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/api",
+            "description": "Api local server"
+        },
+        {
+            "url": "http://storefy.workingtech.com.br:31080/api",
+            "description": "Api dev server"
+        }
+    ],
+    "paths": {
+        "/auth/login": {
+            "post": {
+                "tags": [
+                    "Login"
+                ],
+                "summary": "Login",
+                "operationId": "Login",
+                "requestBody": {
+                    "description": "Logar no sistema",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "email": {
+                                        "title": "email",
+                                        "description": "email"
+                                    },
+                                    "password": {
+                                        "title": "password",
+                                        "description": "password",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "token": {
+                                            "title": "token",
+                                            "description": "token",
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/bancos": {
+            "get": {
+                "tags": [
+                    "bancos"
+                ],
+                "summary": "Get all items",
+                "operationId": "getBancos",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Bancos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "bancos"
+                ],
+                "summary": "Add a new item",
+                "operationId": "addBancos",
+                "requestBody": {
+                    "description": "Object to add new item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Bancos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Bancos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/bancos/{uuid}": {
+            "get": {
+                "tags": [
+                    "bancos"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "getBancosById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Bancos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "bancos"
+                ],
+                "summary": "Update item",
+                "operationId": "updateBancos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Object to update item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Bancos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Bancos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "bancos"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteBancos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/boletos": {
+            "get": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Get all items",
+                "operationId": "getBoletos",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Boletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Add a new item",
+                "operationId": "addBoletos",
+                "requestBody": {
+                    "description": "Object to add new item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Boletos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Boletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/boletos/{uuid}": {
+            "get": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "getBoletosById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Boletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Update item",
+                "operationId": "updateBoletos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Object to update item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Boletos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Boletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteBoletos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/boletos/print/{uuid}": {
+            "get": {
+                "tags": [
+                    "boletos"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "printBoletosById",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "title": "html",
+                                            "description": "html to print (do not use in swagger)"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/categorias": {
+            "get": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Get all items",
+                "operationId": "getCategorias",
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                },
+                                                "tipo": {
+                                                    "title": "tipo",
+                                                    "description": "Retorno do tipo de categoria"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Categorias"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Add a new item",
+                "operationId": "addCategorias",
+                "requestBody": {
+                    "description": "Object to add new item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categorias"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Categorias"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/categorias/{uuid}": {
+            "get": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "getCategoriasById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                },
+                                                "tipo": {
+                                                    "title": "tipo",
+                                                    "description": "Retorno do tipo de categoria"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Categorias"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Update item",
+                "operationId": "updateCategorias",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Object to update item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Categorias"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/Categorias"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "categorias"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteCategorias",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cfg-boletos": {
+            "get": {
+                "tags": [
+                    "cfg-boletos"
+                ],
+                "summary": "Get all items",
+                "operationId": "getCfgBoletos",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/CfgBoletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "cfg-boletos"
+                ],
+                "summary": "Add a new item",
+                "operationId": "addCfgBoletos",
+                "requestBody": {
+                    "description": "Object to add new item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CfgBoletos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/CfgBoletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/cfg-boletos/{uuid}": {
+            "get": {
+                "tags": [
+                    "cfg-boletos"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "getCfgBoletosById",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/CfgBoletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "cfg-boletos"
+                ],
+                "summary": "Update item",
+                "operationId": "updateCfgBoletos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Object to update item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CfgBoletos"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/CfgBoletos"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "cfg-boletos"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteCfgBoletos",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tipos-categoria": {
+            "get": {
+                "tags": [
+                    "tipos-categoria"
+                ],
+                "summary": "Get all items",
+                "operationId": "getTiposCategoria",
+                "parameters": [
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/TiposCategoria"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "tipos-categoria"
+                ],
+                "summary": "Add a new item",
+                "operationId": "addTiposCategoria",
+                "requestBody": {
+                    "description": "Object to add new item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TiposCategoria"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/TiposCategoria"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Validation error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "$ref": "#/components/schemas/validate_message"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        },
+        "/tipos-categoria/{id}": {
+            "get": {
+                "tags": [
+                    "tipos-categoria"
+                ],
+                "summary": "Get item by ID",
+                "operationId": "getTiposCategoria_id",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "$ref": "#/components/parameters/fields"
+                    },
+                    {
+                        "$ref": "#/components/parameters/where"
+                    },
+                    {
+                        "$ref": "#/components/parameters/orderBy"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/TiposCategoria"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "put": {
+                "tags": [
+                    "tipos-categoria"
+                ],
+                "summary": "Update item",
+                "operationId": "updateTiposCategoria",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "description": "Object to update item",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/TiposCategoria"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "allOf": [
+                                        {
+                                            "properties": {
+                                                "id": {
+                                                    "title": "id",
+                                                    "description": "id",
+                                                    "type": "integer"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/TiposCategoria"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "tipos-categoria"
+                ],
+                "summary": "Delete item",
+                "operationId": "deleteTiposCategoria",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Item not found"
+                    }
+                },
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ]
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "validate_message": {
+                "title": "Error message",
+                "description": "Error jso1n",
+                "required": [
+                    "code",
+                    "message"
+                ],
+                "properties": {
+                    "code": {
+                        "type": "string",
+                        "readOnly": true
+                    },
+                    "message": {
+                        "type": "string",
+                        "minLength": 8,
+                        "readOnly": true
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "ErrorMessage"
+                }
+            },
+            "Bancos": {
+                "title": "Bancos model",
+                "description": "Bancos model",
+                "required": [],
+                "properties": {
+                    "field name": {
+                        "title": "field title",
+                        "description": "Field name"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "uuid": {
+                        "title": "uuid",
+                        "description": "Uuid"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Bancos"
+                }
+            },
+            "Boletos": {
+                "title": "Boletos model",
+                "description": "Boletos model",
+                "required": [],
+                "properties": {
+                    "field name": {
+                        "title": "field title",
+                        "description": "Field name"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "uuid": {
+                        "title": "uuid",
+                        "description": "Uuid"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Boletos"
+                }
+            },
+            "Categorias": {
+                "title": "Categorias model",
+                "description": "Categorias model",
+                "required": [],
+                "properties": {
+                    "nome": {
+                        "title": "nome",
+                        "description": "Nome"
+                    },
+                    "uuid": {
+                        "title": "uuid",
+                        "description": "Uuid"
+                    },
+                    "tipo": {
+                        "title": "tipo",
+                        "description": "Tipo de categoria (Ex: cat_clientes, cat_contas)"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status",
+                        "type": "boolean",
+                        "default": false
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "Categorias"
+                }
+            },
+            "CfgBoletos": {
+                "title": "CfgBoletos model",
+                "description": "CfgBoletos model",
+                "required": [],
+                "properties": {
+                    "field name": {
+                        "title": "field title",
+                        "description": "Field name"
+                    },
+                    "status": {
+                        "title": "status",
+                        "description": "Status",
+                        "type": "boolean",
+                        "default": false
+                    },
+                    "uuid": {
+                        "title": "uuid",
+                        "description": "Uuid"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "CfgBoletos"
+                }
+            },
+            "TiposCategoria": {
+                "title": "TiposCategoria model",
+                "description": "TiposCategoria model",
+                "required": [],
+                "properties": {
+                    "descricao": {
+                        "title": "descricao",
+                        "description": "Descrição"
+                    },
+                    "codigo": {
+                        "title": "codigo",
+                        "description": "Codigo"
+                    },
+                    "endPoint": {
+                        "title": "endPoint",
+                        "description": "Endpoint"
+                    }
+                },
+                "type": "object",
+                "xml": {
+                    "name": "TiposCategoria"
+                }
+            }
+        },
+        "parameters": {
+            "fields": {
+                "name": "fields",
+                "in": "query",
+                "description": "Fields to return"
+            },
+            "where": {
+                "name": "where",
+                "in": "query",
+                "description": "filter of any database fields (always send ternaries: 'field,operator,value')'"
+            },
+            "orderBy": {
+                "name": "orderBy",
+                "in": "query",
+                "description": "Order ny database fields (always send: 'field,order')'"
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "bearerFormat": "JWT",
+                "scheme": "bearer"
+            }
+        }
+    },
+    "security": [
+        []
+    ]
+}

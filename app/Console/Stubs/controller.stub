@@ -1,0 +1,185 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Repositories\repository_class;
+
+/**
+ * Class controller_class
+ * @package controller_namespace
+ */
+class controller_class extends Controller
+{
+
+    use ApiControllerTrait;
+
+
+    /**
+     * @OA\Post(
+     *     path="/permission_name",
+     *     tags={"permission_name"},
+     *     operationId="add_path_name",
+     *     summary="Add a new item",
+     *       @OA\RequestBody(
+     *            description="Object to add new item",
+     *            required=true,
+     * 			@OA\JsonContent(ref="#/components/schemas/camel_path_name"),
+     *        ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             allOf={
+     *                   @OA\Schema (ref="#/components/schemas/camel_path_name")
+     *              },
+     *             @OA\Property(
+     *              description="id",
+     *             type="integer",
+     *             title="id",
+     *              property="id",
+     *             )
+     *          ),
+     *      ),
+     *      @OA\Response(
+     *         response=400,
+     *         description="Validation error",
+     *         @OA\JsonContent(
+     *             @OA\Property(property="error", type="object", ref="#/components/schemas/validate_message"),
+     *         )
+     *      ),
+     *      security={{"bearerAuth":{}}}
+     * )
+     */
+
+    /**
+     * @OA\Get(
+     *     path="/permission_name/{uuid}",
+     *     tags={"permission_name"},
+     *     operationId="get_path_byid",
+     *     summary="Get item by ID",
+     *       @OA\Parameter(
+     *            name="id",
+     *            in="path",
+     *           required=true,
+     *        ),
+     *       @OA\Parameter(ref="#/components/parameters/fields"),
+     *       @OA\Parameter(ref="#/components/parameters/where"),
+     *       @OA\Parameter(ref="#/components/parameters/orderBy"),
+     *       @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             allOf={
+     *                   @OA\Schema (ref="#/components/schemas/camel_path_name")
+     *              },
+     *             @OA\Property(
+     *              description="id",
+     *             type="integer",
+     *             title="id",
+     *              property="id",
+     *             )
+     *          ),
+     *      ),
+     *        security={{"bearerAuth":{}}}
+     * )
+     */
+
+    /**
+     * @OA\Get(
+     *     path="/permission_name",
+     *     tags={"permission_name"},
+     *     operationId="get_path_name",
+     *     summary="Get all items",
+     *       @OA\Parameter(ref="#/components/parameters/fields"),
+     *       @OA\Parameter(ref="#/components/parameters/where"),
+     *       @OA\Parameter(ref="#/components/parameters/orderBy"),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             allOf={
+     *                   @OA\Schema (ref="#/components/schemas/camel_path_name")
+     *              },
+     *             @OA\Property(
+     *              description="id",
+     *             type="integer",
+     *             title="id",
+     *              property="id",
+     *             )
+     *          ),
+     *      ),
+     *        security={{"bearerAuth":{}}}
+     * )
+     */
+
+    /**
+     * @OA\Put(
+     *     path="/permission_name/{uuid}",
+     *     tags={"permission_name"},
+     *     operationId="update_path_name",
+     *     summary="Update item",
+     *       @OA\Parameter(
+     *            name="id",
+     *            description="",
+     *            in="path",
+     *            required=true,
+     *        ),
+     *       @OA\RequestBody(
+     *            description="Object to update item",
+     *            required=true,
+     * 			@OA\JsonContent(ref="#/components/schemas/camel_path_name"),
+     *        ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *         @OA\JsonContent(
+     *             allOf={
+     *                   @OA\Schema (ref="#/components/schemas/camel_path_name")
+     *              },
+     *             @OA\Property(
+     *              description="id",
+     *             type="integer",
+     *             title="id",
+     *              property="id",
+     *             )
+     *          ),
+     *      ),
+     *        security={{"bearerAuth":{}}}
+     * )
+     */
+
+    /**
+     * @OA\Delete (
+     *     path="/permission_name/{uuid}",
+     *     tags={"permission_name"},
+     *     operationId="delete_path_name",
+     *     summary="Delete item",
+     *       @OA\Parameter(
+     *            name="id",
+     *            in="path",
+     *            required=true,
+     *        ),
+     *      @OA\Response(
+     *         response=200,
+     *         description="Successful operation",
+     *      ),
+     *      @OA\Response(
+     *         response=404,
+     *         description="Item not found",
+     *      ),
+     *        security={{"bearerAuth":{}}}
+     * )
+     */
+
+    protected $repository;
+    protected $permission = 'permission_name';
+
+    /**
+     * controller_class constructor.
+     * @param repository_class $repository
+     */
+    public function __construct(repository_class $repository)
+    {
+        $this->repository = $repository;
+    }
+}

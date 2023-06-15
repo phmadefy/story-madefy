@@ -1,0 +1,55 @@
+<?php
+
+namespace App\Models;
+
+use App\Models\Traits\HasObsDelTrait;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use OwenIt\Auditing\Auditable;
+use OwenIt\Auditing\Contracts\Auditable as AuditableContract;
+
+/**
+ * Class model_class
+ * @package model_namespace
+ */
+
+ /**
+  * @OA\Schema(
+  *     description="model_class model",
+  *     title="model_class model",
+  *    required={},
+  *     @OA\Xml(
+  *         name="model_class"
+  *     )
+  * )
+  */
+class model_class extends Model implements AuditableContract
+{
+
+    /**
+     * @OA\Property(
+     *     description="Field name",
+     *     title="field title",
+     *      property="field name",
+     * ),
+     *
+     * @OA\Property(
+     *     description="Status",
+     *     title="status",
+     *     type="boolean",
+     *     default=false,
+     *      property="status",
+     * ),
+     * @OA\Property(
+     *     description="Uuid",
+     *     title="uuid",
+     *      property="uuid",
+     * ),
+     */
+
+    use SoftDeletes, Auditable, HasObsDelTrait;
+
+    protected $table = 'model_table';
+    protected $guarded = ['created_at', 'updated_at', 'deleted_at'];
+    protected $fillable = [];
+}

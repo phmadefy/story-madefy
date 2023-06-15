@@ -1,0 +1,42 @@
+<?php
+
+namespace App\Repositories;
+
+use App\Repositories\Eloquent\Repository;
+
+/**
+ * Class repository_class
+ * @package repository_namespace
+ */
+class repository_class extends Repository
+{
+
+    protected $relations = [];
+    protected $deleteRelations = [];
+    protected $hasCompany = true;
+    protected $hasUuid = true;
+
+    /**
+     * @return string
+     */
+    public function model()
+    {
+        return 'App\Models\model_class';
+    }
+
+    /**
+     * @return mixed
+     */
+    public function relations()
+    {
+        return $this->relations;
+    }
+
+    /**
+     * @return string
+     */
+    public function validator()
+    {
+        return 'App\Validators\validator_class';
+    }
+}

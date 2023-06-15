@@ -1,0 +1,43 @@
+<?php
+
+namespace App\Validators;
+
+use Prettus\Validator\Contracts\ValidatorInterface;
+use Prettus\Validator\LaravelValidator;
+use Illuminate\Contracts\Validation\Factory;
+
+/**
+ * Class CfgBoletosValidator
+ * @package App\Validators
+ */
+class CfgBoletosValidator extends LaravelValidator
+{
+
+    /**
+     * @var array
+     * Exemplo de rules:
+     * 'campo_do_banco' => 'required|email',
+     *   'descricao' => 'required|unique:empresas,descricao,NULL,id,deleted_at,NULL',
+     *   'descricao' => "required|unique:empresas,descricao,{$this->id},id,deleted_at,NULL",,
+     */
+    public function __construct(Factory $validator)
+       {
+           $this->rules = [
+               ValidatorInterface::RULE_CREATE => [
+
+               ],
+               ValidatorInterface::RULE_UPDATE => [
+               ]
+           ];
+           parent::__construct($validator);
+       }
+
+       /**
+        * @var array
+        * Exemplo de rules:
+        * 'campo_do_banco' => 'required|email',
+        */
+
+    protected $messages = [];
+    protected $attributes = [];
+}
